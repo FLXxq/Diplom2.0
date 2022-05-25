@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Routes } from 'react-router'
+import Calculate from "./pages/Calculate";
+import Navigation from "./layout/Navigation";
+import {APP_LINK} from "./constants/general";
+import Faq from "./pages/Faq";
+import Training from "./pages/Training";
+import Videos from "./pages/Videos";
+import Layout from "./components/layout/layout";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const getElement = (element) => {
+        return (
+            <Layout>
+                {element}
+            </Layout>
+        )
+    }
+    return (
+        <>
+            <div className='Font'>
+                <Navigation/>
+                <Router>
+                    <Routes>
+                        <Route path={APP_LINK.CALCULATE} element={getElement(<Calculate/>)}/>
+                        <Route path={APP_LINK.FAQ} element={getElement(<Faq/>)}/>
+                        <Route path={APP_LINK.WORKOUT} element={getElement(<Training/>)}/>
+                        <Route path={APP_LINK.VIDEOS} element={getElement(<Videos/>)}/>
+                    </Routes>
+                </Router>
+            </div>
+        </>
+    );
 }
 
 export default App;
