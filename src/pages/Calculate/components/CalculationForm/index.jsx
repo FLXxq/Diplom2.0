@@ -5,51 +5,47 @@ import Button from '@mui/material/Button';
 import './style.css'
 import {Grid} from "@mui/material";
 
-export const parseNumber = string => {
-    if (string === "") return null;
-    return parseFloat(string.replace(',', '.'));
-};
-
 const CalculationForm = ({setData}) => {
 
     const [weight, setWeight] = React.useState("");
     const [height, setHeight] = React.useState("");
     const getResult = () => {
-        const parseWeight = parseNumber(weight)
-        const parseHeight = parseNumber(height)
-     const result = Number(parseWeight) / (Number(parseHeight) * Number(parseHeight))
-        setData(result)
+
+     const result = weight / (height * height)
+        setData({
+          imt: result,
+          weight,
+          height
+        })
     }
 
     return (
             <form className='calculation-form'>
-                <Grid container direction={"column"} spacing={2}>
+                <Grid container spacing={2}>
                     <Grid item>
                         <TextField
+                            size={"small"}
+                            type={"number"}
                             value={height}
                             onChange={(event) => {
                                 setHeight(event.target.value)
                             }}
                             fullWidth
-                            label="Ваш рост"
+                            label="Ваш рост, м"
                             id="outlined-start-adornment"
-                            InputProps={{
-                                startAdornment: <InputAdornment position="start">СМ</InputAdornment>,
-                            }}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
+                            size={"small"}
                             value={weight}
                             onChange={(event) => {
                                 setWeight(event.target.value)
                             }}
                             fullWidth
-                            label="Ваш вес"
+                            label="Ваш вес, кг"
                             id="outlined-start-adornment"
-                            InputProps={{
-                                startAdornment: <InputAdornment position="start">КГ</InputAdornment>,
-                            }}
+                            type={"number"}
                         />
                     </Grid>
                     <Grid item alignSelf={"center"}>

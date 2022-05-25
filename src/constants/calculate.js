@@ -310,9 +310,10 @@ export const allRows = [
 
 export const getRow = (dataRow) => {
     const obj = {};
+
     dataRow.forEach((value, index) => {
         obj[`el${index + 1}`] = value
     })
-    console.log(obj)
+
     return obj
 }
