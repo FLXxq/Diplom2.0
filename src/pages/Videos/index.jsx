@@ -1,16 +1,24 @@
 import React from "react";
 import YouTube from "react-youtube";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Header from "../../components/Header";
+
+const VIDEOS_DATA = [
+  "nJ_b4VDbmmk",
+  "JkaxUblCGz0",
+  "evNysnWaA3A",
+  "JG1n8wKT3Ls",
+  "hyau4Pl7Sqk",
+  "U1q99Wr6nE0",
+];
 
 const Videos = () => {
   const opts = {
-    height: "390",
-    width: "640",
+    height: "340",
+    width: "550",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 
@@ -18,13 +26,19 @@ const Videos = () => {
     <>
       <Header content="Видео" />
       <Typography>Zivem</Typography>
-      <Box>
-        <YouTube
-          videoId="U1q99Wr6nE0"
-          opts={opts}
-          onReady={(e) => e.target.pauseVideo()}
-        />
-      </Box>
+      <Grid container gap={2} justifyContent="center">
+        {VIDEOS_DATA.map((url, index) => (
+          <Box>
+            <Grid key={index} item xs={3}>
+              <YouTube
+                videoId={url}
+                opts={opts}
+                onReady={(e) => e.target.pauseVideo()}
+              />
+            </Grid>
+          </Box>
+        ))}
+      </Grid>
     </>
   );
 };
